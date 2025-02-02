@@ -1,0 +1,43 @@
+img {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
+
+.card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Show only 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 4.5em; /* Adjust based on font size */
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.8); /* Optional: Light overlay */
+  z-index: 999;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 10px;
+}
+
+.loading-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333; /* Dark gray for visibility */
+}

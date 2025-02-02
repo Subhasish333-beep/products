@@ -1,0 +1,25 @@
+<div class="dashboard">
+  <aside class="sidebar">
+    <div class="logoContainer">
+      <img src="favicon.ico" alt="Anguklar" />
+      <h2>Dashboard</h2>
+    </div>
+    <nav>
+      <ul>
+        <li>
+          <a routerLink="/dashboard/addproduct" routerLinkActive="active">Add Product</a>
+        </li>
+        <li>
+            <a routerLink="/dashboard/productlist" routerLinkActive="active">Product List</a>
+          </li>
+      </ul>
+    </nav>
+  </aside>
+  <section class="mainContent">
+    <header>
+        <h1>Dashboard</h1>
+        <button (click)="logout()">Logiut</button>
+    </header>
+    <router-outlet />
+  </section>
+</div>

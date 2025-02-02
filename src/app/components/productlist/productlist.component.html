@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+      <!-- Loader (Centered Vertically & Horizontally) -->
+      <div *ngIf="loading" class="loader-container">
+        <div class="text-center">
+          <div class="spinner-border text-primary" role="status"></div>
+          <p class="loading-text">Loading...</p> <!-- ✅ Make text visible -->
+        </div>
+      </div>
+  
+      <!-- Product List (Show when loading is false) -->
+      <div class="col-sm-4" *ngFor="let product of productList">
+        <div class="card mt-4">
+          <img [src]="product.thumbnail" class="card-img-top" alt="{{ product.title }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.title }}</h5>
+            <p class="card-text">{{ product.description }}</p>
+            <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
+            <a href="#" class="btn btn-primary">Buy Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

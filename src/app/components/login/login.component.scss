@@ -1,0 +1,96 @@
+.containers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #783535, #4c1eb0);
+    height: 100vh;
+    width: 100vw;
+}
+
+.innercontainer {
+    width: 60vw;
+    height: 80vh;
+    display: flex;
+    box-shadow: 0px 0px 30px 10px rgba(14, 9, 9, 0.2);    
+    background-color: white;
+}
+
+.left {
+    padding: 5px;
+    width: 40%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to right, #150808, #948ba8);
+}
+
+p {
+    margin: 0;
+}
+
+.title {
+    color: white;
+    font-size: 1.2rem;
+}
+
+.shortDesc {
+    color: white;
+    font-size: 0.65rem;
+}
+
+.longDesc {
+    width: 90%;
+    text-align: center;
+    margin-top: 10px;
+    color: white;
+    font-size: 0.75rem;
+}
+
+.right {
+    padding: 5px;
+    width: 60%;
+    height: 80vh;
+    background: white;
+}
+
+.headerRegister{
+    display: flex;
+    justify-content:end
+}
+
+.info {
+    font-size: 0.7rem;
+    padding-right: 15px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding-top: 5px;
+
+}
+
+.registerBtn {
+    background: white;
+    border: 1px solid grey;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.fields {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    margin-left: 10%;
+    
+    margin-top: 25vh
+}
+
+mat-form-field {
+    width: 60%;
+}
+
+.signinBtn {
+    width: 20%;
+    height: 40px;
+    background: black;
+    color: white;
+}

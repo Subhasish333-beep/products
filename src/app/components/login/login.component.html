@@ -1,0 +1,43 @@
+<div class="containers">
+  <div class="innercontainer">
+    <div class="left">
+      <p class="title">ProductCMS</p>
+      <p class="shortDesc">A product management system</p>
+      <p class="longDesc">
+        A system where user can log on register on the basis of the role and
+        perform operations like add, delete product
+      </p>
+    </div>
+    <div class="right">
+      <div class="headerRegister">
+        <span class="info">Dont't have an account? </span>
+        <button class="registerBtn" [routerLink]="['/register']">
+          Register
+        </button>
+      </div>
+      <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+      <div class="fields">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Enter your password</mat-label>
+            <input formControlName="password" matInput [type]="hide() ? 'password' : 'text'" />
+            <button
+            type="button"
+              mat-icon-button
+              matSuffix
+              (click)="clickEvent($event)"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide()"
+            >
+              <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+          <button type="submit" class="signinBtn">Sign In</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
