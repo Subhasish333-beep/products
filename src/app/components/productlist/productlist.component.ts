@@ -1,11 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-productlist',
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   templateUrl: './productlist.component.html',
   styleUrls: ['./productlist.component.scss'],
