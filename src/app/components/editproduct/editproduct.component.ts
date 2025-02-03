@@ -1,11 +1,99 @@
-import { Component } from '@angular/core';
-
+import { Component, inject, OnInit } from '@angular/core';
+import { ProductsService } from '../../services/products.service';
+import { ActivatedRoute } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { RouterModule, Router } from '@angular/router';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {MatCardModule} from '@angular/material/card';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-editproduct',
-  imports: [],
+  imports: [
+    CommonModule,
+    MatFormFieldModule,
+    MatDividerModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatCardModule
+  ],
   templateUrl: './editproduct.component.html',
   styleUrl: './editproduct.component.scss'
 })
-export class EditproductComponent {
+export class EditproductComponent implements OnInit {
 
+  productService: ProductsService = inject(ProductsService);
+  private activatedRoute = inject(ActivatedRoute);
+  addProduct: FormGroup = new FormGroup({});
+  formBuilder = inject(FormBuilder);
+  imagePreview: string | ArrayBuffer | null = null;
+
+  prdId: number = 0;
+  ngOnInit(): void {
+    this.addProduct = this.formBuilder.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      price: ['', Validators.required],
+      image: ['']
+    });  
+
+    let id = this.activatedRoute.snapshot.paramMap.get('id');
+    if(id) {
+      const productId = Number(id);
+      this.prdId = productId;
+      this.productService.getProductById(productId).subscribe(
+        (response) => {
+          console.log(response);
+          this.addProduct.patchValue(response);
+        },
+        (error) => {
+          console.log(error);         
+        }
+      )
+    }
+  }
+
+  onSubmit() {
+    const params = {
+      title: this.addProduct.value.title,
+      description: this.addProduct.value.description,
+      price: this.addProduct.value.price,
+      thumbnail: this.addProduct.value.image
+    }
+    // console.log(signIn);
+   this.productService.updateProduct(params, this.prdId).subscribe(
+    (response) => {
+      console.log("update-res", response);
+      
+    }, 
+    (error) => {
+      console.log("update-errpr", error);
+      
+    }
+   )
+    
+  }
+  onFileSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      this.addProduct.patchValue({ image: file });
+      this.addProduct.get('image')?.updateValueAndValidity();
+
+      // Preview Image
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 }

@@ -1,0 +1,31 @@
+mat-form-field {
+  width: 80%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.upload-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.upload-input {
+  width: 100%;
+  padding: 10px;
+}
+
+.image-preview-card {
+  margin-top: 15px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.preview-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}

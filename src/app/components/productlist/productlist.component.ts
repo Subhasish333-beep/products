@@ -1,7 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-productlist',
@@ -18,6 +19,10 @@ export class ProductlistComponent implements OnInit {
   public productList: any[] = []; // Use an empty array instead of null
   loading: boolean = true;
 
+  isModalOpen= signal(false)
+
+  selectedProduct: any = null;
+
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe(
       (response: any) => {
@@ -32,4 +37,29 @@ export class ProductlistComponent implements OnInit {
       }
     );
   }
+
+  openModal(product: any) {
+    this.isModalOpen.set(true);
+    this.selectedProduct = product;
+  }
+
+  closeModal() {
+    console.log(this.selectedProduct);
+    this.isModalOpen.set(false)
+  }
+
+  deleteProduct() {
+    let id = Number(this.selectedProduct?.id);
+    this.productService.deleteProduct(id).subscribe(
+      (resposne) => {
+        console.log("delete-product-res", resposne);
+        this.closeModal();
+      },
+      (error) => {
+        console.log("delete-product-err", error);
+        this.closeModal();
+      }
+    )
+  }
 }
+

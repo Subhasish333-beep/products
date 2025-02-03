@@ -16,4 +16,16 @@ export class ProductsService {
   addProduct(product:any) {
     return this.http.post(this.apiUrl+"/products/add", product)
   }
+
+  getProductById(id: number) {
+    return this.http.get(this.apiUrl+"/products/"+id);
+  }
+
+  updateProduct(product:any, id: number) {
+    return this.http.put(this.apiUrl+"/products/"+id, product);
+  }
+
+  deleteProduct(id: number) {
+    return this.http.delete(this.apiUrl+"/products/"+id);
+  }
 }

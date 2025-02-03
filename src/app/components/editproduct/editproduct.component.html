@@ -1,1 +1,51 @@
-<p>editproduct works!</p>
+<div class="container">
+    <form [formGroup]="addProduct" (ngSubmit)="onSubmit()">
+      <div class="row align-items-start">
+        <div class="col mt-4">
+          <mat-form-field>
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title" />
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <div class="row align-items-start">
+          <div class="col mt-4">
+            <mat-form-field>
+              <mat-label>Description</mat-label>
+              <textarea matInput formControlName="description"></textarea>
+              <!-- <input matInput formControlName="description" /> -->
+            </mat-form-field>
+          </div>
+        </div>
+  
+        <div class="row align-items-start">
+          <div class="col mt-4">
+            <mat-form-field>
+              <mat-label>Price($)</mat-label>
+              <input matInput formControlName="price" />
+            </mat-form-field>
+          </div>
+        </div>
+  
+        <div class="row align-items-start">
+          <div class="col mt-4">
+            <label class="upload-label">Upload Image</label>
+            <input type="file" (change)="onFileSelected($event)" accept="image/*" class="upload-input" />
+            
+            <!-- Image Preview -->
+            <mat-card *ngIf="imagePreview" class="image-preview-card">
+              <img [src]="imagePreview" alt="Image Preview" class="preview-img"/>
+            </mat-card>
+          </div>
+        </div>
+    
+        <!-- Submit Button -->
+        <div class="row mt-4">
+          <div class="col text-center">
+            <button mat-raised-button color="primary" type="submit">Update</button>
+          </div>
+        </div>
+    </form>
+  </div>
+  
