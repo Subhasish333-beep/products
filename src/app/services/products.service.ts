@@ -28,4 +28,16 @@ export class ProductsService {
   deleteProduct(id: number) {
     return this.http.delete(this.apiUrl+"/products/"+id);
   }
+
+  getAllCategories() {
+    return this.http.get(this.apiUrl+"/products/categories");
+  }
+
+  getProductsByCategory(category: string) {
+    return this.http.get(this.apiUrl+"/products/category/"+category)
+  }
+
+  searchProduct(query: string) {
+    return this.http.get(this.apiUrl+"/products/search?q="+query);
+  }
 }

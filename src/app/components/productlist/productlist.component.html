@@ -1,4 +1,24 @@
 <div class="container">
+
+  <div class="row mt-3">
+    <div class="col">
+      <input
+      type="text"
+      id="search"
+      class="form-control"
+      placeholder="Search products..."
+      [formControl]="searchControl"
+    />
+    </div>
+    <div class="col">
+      <select id="category" class="form-select" [(ngModel)]="selectedCategory" (change)="getCategoryProdutcs()">
+        <option value="">Select Category</option>
+        <option value="all">All Categories</option>
+        <option *ngFor="let category of categories" [value]="category?.slug">{{ category?.name }}</option>
+      </select>
+    </div>
+  </div>
+
     <div class="row">
       <!-- Loader (Centered Vertically & Horizontally) -->
       <div *ngIf="loading" class="loader-container">
