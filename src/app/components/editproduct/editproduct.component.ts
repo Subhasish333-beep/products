@@ -1,13 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import { CommonModule } from '@angular/common';
@@ -36,6 +36,9 @@ export class EditproductComponent implements OnInit {
   addProduct: FormGroup = new FormGroup({});
   formBuilder = inject(FormBuilder);
   imagePreview: string | ArrayBuffer | null = null;
+
+   snackBar = inject(MatSnackBar);
+    router: Router = inject(Router);
 
   prdId: number = 0;
   ngOnInit(): void {
@@ -73,11 +76,22 @@ export class EditproductComponent implements OnInit {
    this.productService.updateProduct(params, this.prdId).subscribe(
     (response) => {
       console.log("update-res", response);
-      
+      this.snackBar.open('Data updated successfully!', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['success-snackbar']  // Custom class (optional)
+      });
+      this.router.navigateByUrl("/dashboard/productlist")
     }, 
     (error) => {
       console.log("update-errpr", error);
-      
+      this.snackBar.open('Failed to save data. Please try again', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['success-snackbar']  // Custom class (optional)
+      });
     }
    )
     

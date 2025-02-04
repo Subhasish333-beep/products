@@ -5,10 +5,10 @@ import { RouterModule } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
-
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-productlist',
-  imports: [CommonModule, RouterModule, MatSelectModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, RouterModule, MatSnackBarModule, MatSelectModule, ReactiveFormsModule, FormsModule],
   templateUrl: './productlist.component.html',
   styleUrls: ['./productlist.component.scss'],
 })
@@ -24,6 +24,7 @@ export class ProductlistComponent implements OnInit {
   selectedProduct: any = null;
 
   searchControl = new FormControl('');
+  snackBar = inject(MatSnackBar);
 
   ngOnInit(): void {
     this.productService.getAllCategories().subscribe(
@@ -91,10 +92,22 @@ export class ProductlistComponent implements OnInit {
     this.productService.deleteProduct(id).subscribe(
       (resposne) => {
         console.log('delete-product-res', resposne);
+        this.snackBar.open('Data deleted successfully!', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['success-snackbar']  // Custom class (optional)
+        });
         this.closeModal();
       },
       (error) => {
         console.log('delete-product-err', error);
+        this.snackBar.open('Sorry something went wrong. Please try again', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['success-snackbar']  // Custom class (optional)
+        });
         this.closeModal();
       }
     );

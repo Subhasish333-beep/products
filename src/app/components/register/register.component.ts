@@ -4,7 +4,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import {MatSelectModule} from '@angular/material/select';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -29,6 +29,8 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 export class RegisterComponent {
   signUpForm: FormGroup = new FormGroup({});
   formBuilder = inject(FormBuilder);
+
+  router = inject(Router);
 
   loginService: AuthenticationService = inject(AuthenticationService);
     snackBar = inject(MatSnackBar);
@@ -68,6 +70,7 @@ export class RegisterComponent {
               verticalPosition: 'top',
               panelClass: ['success-snackbar']  // Custom class (optional)
             });
+            this.router.navigateByUrl("/login")
           }
           else {
             this.snackBar.open('Sorry, something went wrong. Please try again.', 'Close', {

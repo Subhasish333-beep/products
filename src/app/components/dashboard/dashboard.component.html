@@ -17,9 +17,36 @@
   </aside>
   <section class="mainContent">
     <header>
-        <h1>Dashboard</h1>
-        <button (click)="logout()">Logiut</button>
+        <h1>{{pageTitle}}</h1>
+        <button (click)="logout()">Log out</button>
     </header>
+    <div *ngIf="pageTitle==='Dashboard'" class="loader-container">
+      <div class="container mb-4">
+        <p class="heading">Featured Products</p>
+        <div class="row">
+          <div class="col-sm-4" *ngFor="let product of productList">
+            <div class="card mt-3">
+              <img [src]="product.thumbnail" class="card-img-top" alt="{{ product.title }}">
+              <div class="card-body">
+                <h5 class="card-title">{{ product.title }}</h5>
+                <p class="card-text">{{ product.description }}</p>
+                <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
+                <div class="row">
+                  <div class="col-2">
+                    <button [routerLink] = "['/dashboard/editproduct', product.id]" class="btn btn-primary">Edit</button>
+                  </div>
+                  <div class="col">
+                    <button class="btn btn-danger" (click)="openModal(product)">Delete</button>
+    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+    </div>
     <router-outlet />
   </section>
 </div>

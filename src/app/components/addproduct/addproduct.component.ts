@@ -35,6 +35,9 @@ export class AddproductComponent {
   imagePreview: string | ArrayBuffer | null = null;
   productService: ProductsService = inject(ProductsService);
 
+  snackBar = inject(MatSnackBar);
+  router = inject(Router)
+
   ngOnInit(): void {
     this.addProduct = this.formBuilder.group({
       title: ['', Validators.required],
@@ -70,7 +73,13 @@ export class AddproductComponent {
    this.productService.addProduct(params).subscribe(
     (response) => {
       console.log("add-res", response);
-      
+      this.snackBar.open('Product added successfully!', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['success-snackbar']  // Custom class (optional)
+      });
+      this.router.navigateByUrl("/dashboard/productlist")
     }, 
     (error) => {
       console.log("add-errpr", error);

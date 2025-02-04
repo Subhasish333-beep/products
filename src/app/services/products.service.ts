@@ -40,4 +40,8 @@ export class ProductsService {
   searchProduct(query: string) {
     return this.http.get(this.apiUrl+"/products/search?q="+query);
   }
+
+  featuredProducts() {
+    return this.http.get(this.apiUrl+"/products?limit=12")
+  }
 }
