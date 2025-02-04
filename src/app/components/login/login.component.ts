@@ -8,6 +8,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
@@ -20,6 +21,7 @@ import { AuthenticationService } from '../../services/authentication.service';
     MatIconModule,
     RouterModule,
     FormsModule,
+    CommonModule,
     ReactiveFormsModule,
     MatSnackBarModule
   ],
@@ -36,8 +38,15 @@ export class LoginComponent {
 
   ngOnInit(): void {
     this.signInForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+      email: ['', [
+        Validators.required,
+        Validators.pattern(/^[\w\.-]+@[\w\.-]+\.[a-zA-Z]{2,7}$/)
+      ]],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(18)
+      ]],
     });  
   }
 

@@ -21,6 +21,12 @@
           <mat-label>Email</mat-label>
           <input matInput formControlName="email" />
         </mat-form-field>
+        <small class="text-danger mb-3" *ngIf="signInForm.get('email')?.errors?.['required'] && signInForm.get('email')?.touched">
+          Email is required.
+        </small>
+        <small class="text-danger mb-3" *ngIf="signInForm.get('email')?.errors?.['pattern'] && signInForm.get('email')?.touched">
+          Please enter a valid email.
+        </small>
         <mat-form-field>
             <mat-label>Enter your password</mat-label>
             <input formControlName="password" matInput [type]="hide() ? 'password' : 'text'" />
@@ -35,6 +41,15 @@
               <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
           </mat-form-field>
+          <small class="text-danger mb-3" *ngIf="signInForm.get('password')?.errors?.['required'] && signInForm.get('password')?.touched">
+            Passowrd is required.
+          </small>
+          <small class="text-danger mb-3" *ngIf="signInForm.get('password')?.errors?.['minlength'] && signInForm.get('password')?.touched">
+           Minimum 6 characters required.
+          </small>
+          <small class="text-danger mb-3" *ngIf="signInForm.get('password')?.errors?.['maxlength'] && signInForm.get('password')?.touched">
+           Maximum 18 characters accepted.
+           </small>
           <button type="submit" class="signinBtn">Sign In</button>
       </div>
       </form>
